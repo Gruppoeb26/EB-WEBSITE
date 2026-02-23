@@ -212,46 +212,6 @@
             transform: scale(1.1);
         }
 
-        .partner-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
-            background: white;
-            border: 1px solid #f1f1f1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            color: #2D3E40;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            opacity: 0.4;
-            /* Visible but subtle */
-        }
-
-        .group\/partners:hover .partner-arrow {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .partner-arrow:hover {
-            background: #2D3E40;
-            color: white;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .partner-arrow-left {
-            left: 20px;
-        }
-
-        .partner-arrow-right {
-            right: 20px;
-        }
-
         /* Hero gradient overlay */
         .hero-overlay {
             background: linear-gradient(135deg,
@@ -758,93 +718,79 @@
             class="text-center text-teal-brand text-lg md:text-xl font-semibold tracking-[0.3em] uppercase mb-10 fade-in">
             I Nostri Partner</p>
 
-        <div class="max-w-7xl mx-auto relative px-12">
-            <button class="partner-arrow partner-arrow-left" onclick="scrollPartners('left')"
-                aria-label="Slide sinistra">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-            </button>
-            <button class="partner-arrow partner-arrow-right" onclick="scrollPartners('right')"
-                aria-label="Slide destra">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-            </button>
+        <div class="max-w-7xl mx-auto relative px-6 md:px-8">
 
             <div class="partner-marquee" id="partnerMarquee">
                 <div class="partner-track flex items-center whitespace-nowrap" id="partnerTrack">
                     <img src="Logo/Vaillant_Logo.png" alt="Vaillant"
-                        class="h-10 md:h-12 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-10 md:h-12 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="Logo/Samsung_Logo.png" alt="Samsung"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-16 md:h-20 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939639.jpg?1726827282998"
                         alt="Partner 1"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939710.jpg?1726827285436"
                         alt="Partner 2"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939699.jpg?1726827286984"
                         alt="Partner 3"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939690.jpg?1726827288407"
                         alt="Partner 4"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939682.jpg?1726827289732"
                         alt="Partner 5"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939672.jpg?1726827291467"
                         alt="Partner 6"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939615.jpg?1726827292577"
                         alt="Partner 7"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939623.jpg?1726827293842"
                         alt="Partner 8"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939631.jpg?1726827294935"
                         alt="Partner 9"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939647.jpg?1726827296157"
                         alt="Partner 10"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <!-- Duplicate for seamless loop -->
                     <img src="Logo/Vaillant_Logo.png" alt="Vaillant"
-                        class="h-10 md:h-12 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-10 md:h-12 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="Logo/Samsung_Logo.png" alt="Samsung"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-16 md:h-20 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939639.jpg?1726827282998"
                         alt="Partner 1"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939710.jpg?1726827285436"
                         alt="Partner 2"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939699.jpg?1726827286984"
                         alt="Partner 3"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939690.jpg?1726827288407"
                         alt="Partner 4"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939682.jpg?1726827289732"
                         alt="Partner 5"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939672.jpg?1726827291467"
                         alt="Partner 6"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939615.jpg?1726827292577"
                         alt="Partner 7"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939623.jpg?1726827293842"
                         alt="Partner 8"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939631.jpg?1726827294935"
                         alt="Partner 9"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939647.jpg?1726827296157"
                         alt="Partner 10"
-                        class="h-16 md:h-20 mx-16 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-48 md:h-64 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                 </div>
             </div>
         </div>
@@ -1383,67 +1329,6 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // === PARTNER SLIDER ROBUST DISCRETE SCROLL ===
-        let isScrolling = false;
-        function scrollPartners(direction) {
-            if (isScrolling) return;
-            isScrolling = true;
-
-            const track = document.getElementById('partnerTrack');
-            const marquee = document.getElementById('partnerMarquee');
-            const logos = Array.from(track.getElementsByTagName('img'));
-            const containerCenter = marquee.offsetWidth / 2;
-
-            // Get current transform matrix
-            const style = window.getComputedStyle(track);
-            const matrix = new WebKitCSSMatrix(style.transform);
-            let currentX = matrix.m41;
-
-            // Immediately Freeze marquee at current position
-            track.style.animation = 'none';
-            track.style.transform = `translateX(${currentX}px)`;
-
-            // Find current logo index (the one closest to center)
-            let nearestIndex = 0;
-            let minDistance = Infinity;
-
-            logos.forEach((logo, index) => {
-                const logoCenter = logo.offsetLeft + (logo.offsetWidth / 2) + currentX;
-                const distance = Math.abs(logoCenter - containerCenter);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    nearestIndex = index;
-                }
-            });
-
-            let targetIndex = direction === 'left' ? nearestIndex - 1 : nearestIndex + 1;
-
-            // Cycle logic for seamless marquee (half of logos are duplicates)
-            const halfLogos = logos.length / 2;
-            if (targetIndex < 0) targetIndex = halfLogos - 1;
-            if (targetIndex >= logos.length) targetIndex = halfLogos;
-
-            const targetLogo = logos[targetIndex];
-            const targetX = containerCenter - (targetLogo.offsetLeft + targetLogo.offsetWidth / 2);
-
-            // Apply smooth transition to target
-            track.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
-            track.style.transform = `translateX(${targetX}px)`;
-
-            // Sincronization delay
-            setTimeout(() => {
-                track.style.transition = 'none';
-                track.style.animation = 'partner-scroll 35s linear infinite';
-
-                const trackWidth = track.scrollWidth / 2;
-                let finalX = targetX % trackWidth;
-                if (finalX > 0) finalX -= trackWidth;
-
-                const progress = Math.abs(finalX) / trackWidth;
-                track.style.animationDelay = `-${progress * 35}s`;
-                isScrolling = false;
-            }, 550);
-        }
 
 
         // === LOADER ===
