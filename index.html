@@ -417,8 +417,18 @@
         .counter-num {
             text-shadow: 0 0 40px rgba(200, 164, 90, 0.3);
         }
+
+        /* Nasconde il chatbot di Framework 360 a sinistra senza rompere il form */
+        .ms-chat-container,
+        .ms-chat-launcher,
+        #ms-chat-container,
+        .ms-chatbot {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
     </style>
-    <!-- <script src="https://www.gruppoeb.it/m/bridge/embed.js" crossorigin="anonymous"></script> -->
+    <script src="https://www.gruppoeb.it/m/bridge/embed.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-off-white font-sans text-charcoal overflow-x-hidden">
