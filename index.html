@@ -1186,8 +1186,30 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <!-- Form (Framework 360 CRM Integration) -->
-                <div class="fade-in bg-white p-2 rounded-2xl shadow-sm border border-stone-100">
-                    <ms-form id="5"></ms-form>
+                <div
+                    class="fade-in bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-stone-100 min-h-[400px] flex flex-col justify-center">
+                    <div id="form-container">
+                        <ms-form id="5"></ms-form>
+                    </div>
+
+                    <!-- Custom Success Message (Hidden by default) -->
+                    <div id="success-message" class="hidden text-center space-y-6">
+                        <div class="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-teal-brand text-2xl md:text-3xl">Grazie!</h3>
+                        <p class="text-charcoal/70 leading-relaxed">
+                            Il tuo messaggio è stato inviato correttamente.<br>
+                            Sarete presto ricontattati da un nostro collaboratore per discutere il vostro progetto.
+                        </p>
+                        <button onclick="location.reload()"
+                            class="text-gold font-semibold text-sm hover:underline pt-4">Invia un altro
+                            messaggio</button>
+                    </div>
                 </div>
 
 
@@ -1471,6 +1493,38 @@
 
         // === CURSOR POINTER ON CLICKABLE ===
         document.querySelectorAll('a, button, .sector-card').forEach(el => el.style.cursor = 'pointer');
+
+        // === FRAMEWORK 360 FORM SUCCESS HANDLER ===
+        const formContainer = document.getElementById('form-container');
+        const successMessage = document.getElementById('success-message');
+
+        // Listen for standard form submissions or custom Framework 360 messages
+        document.addEventListener('submit', (e) => {
+            if (e.target.closest('#form-container')) {
+                // Show success after a short delay to allow the actual request to process
+                setTimeout(() => {
+                    formContainer.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    // Scroll slightly to success message if needed
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 800);
+            }
+        });
+
+        // Backup: Mutation observer to catch if FW360 clears the form content internally
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                // If the form content is cleared or dramatically changed (Internal FW360 success state)
+                if (formContainer.innerHTML.trim() === '' || formContainer.querySelector('.ms-thanks-message')) {
+                    formContainer.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                }
+            });
+        });
+
+        if (formContainer) {
+            observer.observe(formContainer, { childList: true, subtree: true });
+        }
     </script>
 
 </body>
