@@ -212,7 +212,6 @@
             transform: scale(1.1);
         }
 
-        /* Partner Slider Arrows */
         .partner-arrow {
             position: absolute;
             top: 50%;
@@ -220,21 +219,23 @@
             width: 48px;
             height: 48px;
             background: white;
-            border: 1px border-stone-100;
+            border: 1px solid #f1f1f1;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
+            z-index: 50;
             color: #2D3E40;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             cursor: pointer;
-            opacity: 0;
+            opacity: 0.4;
+            /* Visible but subtle */
         }
 
-        .partner-marquee:hover .partner-arrow {
+        .group\/partners:hover .partner-arrow {
             opacity: 1;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .partner-arrow:hover {
@@ -774,74 +775,74 @@
             <div class="partner-marquee" id="partnerMarquee">
                 <div class="partner-track flex items-center whitespace-nowrap" id="partnerTrack">
                     <img src="Logo/Vaillant_Logo.png" alt="Vaillant"
-                        class="h-10 md:h-12 mx-12 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-8 md:h-10 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="Logo/Samsung_Logo.png" alt="Samsung"
-                        class="h-10 md:h-12 mx-12 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-9 md:h-11 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939639.jpg?1726827282998"
                         alt="Partner 1"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939710.jpg?1726827285436"
                         alt="Partner 2"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939699.jpg?1726827286984"
                         alt="Partner 3"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939690.jpg?1726827288407"
                         alt="Partner 4"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939682.jpg?1726827289732"
                         alt="Partner 5"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939672.jpg?1726827291467"
                         alt="Partner 6"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939615.jpg?1726827292577"
                         alt="Partner 7"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939623.jpg?1726827293842"
                         alt="Partner 8"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939631.jpg?1726827294935"
                         alt="Partner 9"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939647.jpg?1726827296157"
                         alt="Partner 10"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <!-- Duplicate for seamless loop -->
                     <img src="Logo/Vaillant_Logo.png" alt="Vaillant"
-                        class="h-10 md:h-12 mx-12 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-8 md:h-10 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="Logo/Samsung_Logo.png" alt="Samsung"
-                        class="h-10 md:h-12 mx-12 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-9 md:h-11 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939639.jpg?1726827282998"
                         alt="Partner 1"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939710.jpg?1726827285436"
                         alt="Partner 2"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939699.jpg?1726827286984"
                         alt="Partner 3"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939690.jpg?1726827288407"
                         alt="Partner 4"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939682.jpg?1726827289732"
                         alt="Partner 5"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939672.jpg?1726827291467"
                         alt="Partner 6"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939615.jpg?1726827292577"
                         alt="Partner 7"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939623.jpg?1726827293842"
                         alt="Partner 8"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939631.jpg?1726827294935"
                         alt="Partner 9"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                     <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939647.jpg?1726827296157"
                         alt="Partner 10"
-                        class="h-40 md:h-56 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
+                        class="h-32 md:h-44 mx-20 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 object-contain">
                 </div>
             </div>
         </div>
