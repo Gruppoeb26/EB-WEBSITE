@@ -417,11 +417,17 @@
         .counter-num {
             text-shadow: 0 0 40px rgba(200, 164, 90, 0.3);
         }
+
+        /* Nasconde il chatbot di Framework 360 a sinistra senza rompere il form */
+        .ms-chat-container,
+        .ms-chat-launcher,
+        #ms-chat-container,
+        .ms-chatbot {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
     </style>
-    <script>
-        // Disabilita il chatbot di Framework 360 lasciando attivo il supporto per il form
-        window.FW360_SaaS_Chat_Disable = true;
-    </script>
     <script src="https://www.gruppoeb.it/m/bridge/embed.js" crossorigin="anonymous"></script>
 </head>
 
@@ -1245,7 +1251,28 @@
                 <!-- Form (Framework 360 CRM Integration) -->
                 <div
                     class="fade-in bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-stone-100 min-h-[400px] flex flex-col justify-center">
-                    <ms-form id="5"></ms-form>
+                    <div id="form-container">
+                        <ms-form id="5"></ms-form>
+                    </div>
+
+                    <!-- Custom Success Message (Hidden by default) -->
+                    <div id="success-message" class="hidden text-center space-y-6">
+                        <div class="w-20 h-20 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="font-serif text-teal-brand text-2xl md:text-4xl mb-4">Grazie!</h3>
+                        <p class="text-charcoal/70 text-lg leading-relaxed max-w-md mx-auto">
+                            Il tuo messaggio è stato inviato correttamente.<br>
+                            Sarai presto ricontattato da un nostro collaboratore per discutere il tuo progetto.
+                        </p>
+                        <button onclick="location.reload()"
+                            class="text-gold font-semibold text-sm hover:underline pt-4">Invia un altro
+                            messaggio</button>
+                    </div>
                 </div>
 
 
@@ -1541,17 +1568,19 @@
                 setTimeout(() => {
                     formContainer.classList.add('hidden');
                     successMessage.classList.remove('hidden');
-                    // Scroll slightly to success message if needed
                     successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 800);
+                }, 1000);
             }
         });
 
         // Backup: Mutation observer to catch if FW360 clears the form content internally
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
-                // If the form content is cleared or dramatically changed (Internal FW360 success state)
-                if (formContainer.innerHTML.trim() === '' || formContainer.querySelector('.ms-thanks-message')) {
+                const content = formContainer.innerHTML.trim();
+                // If the form content is cleared or replaced by FW360 success elements
+                if (content === '' ||
+                    formContainer.querySelector('.ms-thanks-message') ||
+                    formContainer.querySelector('.ms-form-success')) {
                     formContainer.classList.add('hidden');
                     successMessage.classList.remove('hidden');
                 }
@@ -1559,6 +1588,10 @@
         });
 
         if (formContainer) {
+            // Also check for existing success markers if script loaded after submission state
+            if (formContainer.innerHTML.trim() === '' && document.readyState === 'complete') {
+                // Might already be successful
+            }
             observer.observe(formContainer, { childList: true, subtree: true });
         }
     </script>
