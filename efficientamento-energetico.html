@@ -58,6 +58,10 @@
             color: #C8A45A !important;
         }
 
+        .nav-solid .nav-logo img {
+            filter: none !important;
+        }
+
         .nav-solid .nav-cta {
             background: #C8A45A !important;
             color: #2D3E40 !important;
@@ -346,7 +350,8 @@
     <nav id="navbar"
         class="nav-glass fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between transition-all duration-500">
         <a href="index.html" class="nav-logo flex items-center gap-3 text-white transition-colors duration-300">
-            <img src="Logo/logo-bianco.png" alt="Gruppo EB" class="h-10" id="nav-logo-img">
+            <img src="Logo/Logo_Gruppo EB_Colori_Orizzontale.png" alt="Gruppo EB" class="h-10 brightness-0 invert"
+                id="nav-logo-img">
         </a>
         <div class="hidden lg:flex items-center gap-8">
             <a href="#pilastri"
@@ -838,7 +843,8 @@
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="md:col-span-1">
-                    <img src="Logo/logo-bianco.png" alt="Gruppo EB" class="h-12 mb-4">
+                    <img src="Logo/Logo_Gruppo EB_Bianco_verticale.png" alt="Gruppo EB"
+                        class="h-20 object-contain mb-8">
                     <p class="text-white/50 text-sm font-light leading-relaxed">Unico Interlocutore,<br>Zero Pensieri.
                     </p>
                 </div>
@@ -933,16 +939,13 @@
 
         // === NAVBAR SCROLL ===
         const navbar = document.getElementById('navbar');
-        const logoImg = document.getElementById('nav-logo-img');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 80) {
                 navbar.classList.remove('nav-glass');
                 navbar.classList.add('nav-solid');
-                logoImg.src = 'Logo/logo-trasparente.png';
             } else {
                 navbar.classList.remove('nav-solid');
                 navbar.classList.add('nav-glass');
-                logoImg.src = 'Logo/logo-bianco.png';
             }
             // Scroll progress
             const scrollTop = window.scrollY;
