@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EB Efficientamento Energetico | Fotovoltaico e Pompe di Calore</title>
+    <meta name="description"
+        content="EB Efficientamento Energetico — Fotovoltaico e Pompe di Calore. Soluzioni integrate per l'indipendenza energetica. Risparmio garantito, zero compromessi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-brand': '#2D3E40',
+                        'gold': '#C8A45A',
+                        'off-white': '#F5F3EF',
+                        'sage': '#A8B5A2',
+                        'charcoal': '#1A1A1A',
+                        'green-energy': '#3B6B3A',
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        /* NAVBAR */
+        .nav-glass {
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-solid {
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-solid .nav-link,
+        .nav-solid .nav-logo {
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid .nav-link:hover {
+            color: #C8A45A !important;
+        }
+
+        .nav-solid .nav-cta {
+            background: #C8A45A !important;
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid #menu-toggle svg {
+            stroke: #2D3E40;
+        }
+
+        /* Mobile */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: #C8A45A;
+        }
+
+        /* Service cards */
+        .service-pillar {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-pillar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -15px rgba(45, 62, 64, 0.25);
+        }
+
+        .service-pillar img {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-pillar:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Process step connector */
+        .process-connector {
+            position: relative;
+        }
+
+        .process-connector::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -2rem;
+            width: 4rem;
+            height: 2px;
+            background: linear-gradient(to right, #C8A45A, transparent);
+        }
+
+        .process-connector:last-child::after {
+            display: none;
+        }
+
+        /* Counter animation */
+        .counter-num {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Benefit check */
+        .benefit-check {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #C8A45A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Sinergia glow */
+        .sinergia-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sinergia-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent 0%, rgba(200, 164, 90, 0.08) 25%, transparent 50%);
+            animation: rotateGlow 8s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Fade in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* UUPM: prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .fade-in {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* UUPM: Focus visible for keyboard nav */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #C8A45A;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* UUPM: cursor-pointer on clickables */
+        a,
+        button,
+        .service-pillar,
+        .nav-cta {
+            cursor: pointer;
+        }
+
+        /* UUPM: Organic floating blobs */
+        .organic-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.07;
+            pointer-events: none;
+        }
+
+        /* UUPM: Trust badge hover */
+        .trust-badge {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(45, 62, 64, 0.15);
+        }
+
+        /* UUPM: Process step connecting line */
+        .process-step {
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .process-step:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                top: 32px;
+                right: -1rem;
+                width: calc(100% - 64px);
+                height: 1px;
+                background: linear-gradient(to right, #C8A45A33, #C8A45A, #C8A45A33);
+                transform: translateX(100%);
+            }
+        }
+
+        /* UUPM: Particle float */
+        @keyframes floatParticle {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(3deg);
+            }
+        }
+
+        .float-slow {
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+
+        .float-medium {
+            animation: floatParticle 4s ease-in-out infinite 1s;
+        }
+
+        .float-fast {
+            animation: floatParticle 3s ease-in-out infinite 0.5s;
+        }
+
+        /* 21st: Magnetic button effect */
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .magnetic-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* 21st: Character reveal */
+        .char-reveal .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(80px) rotate(8deg);
+            filter: blur(4px);
+        }
+
+        /* 21st: Glow pulse for energy orb */
+        @keyframes energyPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(200, 164, 90, 0.3), 0 0 60px rgba(200, 164, 90, 0.1);
+                transform: scale(1);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(200, 164, 90, 0.5), 0 0 100px rgba(200, 164, 90, 0.2);
+                transform: scale(1.05);
+            }
+        }
+
+        .energy-orb {
+            animation: energyPulse 3s ease-in-out infinite;
+        }
+
+        /* 21st: Hero particles */
+        .hero-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(200, 164, 90, 0.4);
+            pointer-events: none;
+        }
+
+        /* 21st: Section divider wave */
+        .wave-divider {
+            position: relative;
+        }
+
+        .wave-divider::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23ffffff' d='M0,30 C360,60 720,0 1080,30 C1260,45 1350,40 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body class="bg-off-white font-sans text-charcoal overflow-x-hidden">
+
+    <!-- Scroll Progress -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gold z-[60]" style="width:0%"></div>
+
+    <!-- ============================================ -->
+    <!-- NAVBAR (glassmorphism, scrolls to solid)     -->
+    <!-- ============================================ -->
+    <nav id="navbar"
+        class="nav-glass fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between transition-all duration-500">
+        <a href="index.html" class="nav-logo flex items-center gap-3 text-white transition-colors duration-300">
+            <img src="Logo/logo-bianco.png" alt="Gruppo EB" class="h-10" id="nav-logo-img">
+        </a>
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="#pilastri"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Soluzioni</a>
+            <a href="#sinergia"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Sinergia</a>
+            <a href="#risparmio"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Risparmio</a>
+            <a href="#contatti"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Contatti</a>
+            <a href="#contatti"
+                class="nav-cta bg-gold text-teal-brand text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-amber-500 hover:scale-105">Richiedi
+                Preventivo</a>
+        </div>
+        <button id="menu-toggle" class="lg:hidden text-white z-60 relative" aria-label="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="mobile-menu fixed inset-0 z-50 bg-teal-brand flex flex-col justify-center items-start px-10 gap-6">
+        <button id="menu-close" class="absolute top-6 right-6 text-white" aria-label="Chiudi menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+        <a href="#pilastri" class="mobile-link text-white text-3xl font-serif italic">Soluzioni</a>
+        <a href="#sinergia" class="mobile-link text-white text-3xl font-serif italic">Sinergia</a>
+        <a href="#risparmio" class="mobile-link text-white text-3xl font-serif italic">Risparmio</a>
+        <a href="#contatti" class="mobile-link text-white text-3xl font-serif italic">Contatti</a>
+        <div class="mt-8 pt-8 border-t border-white/20 w-full">
+            <a href="index.html" class="text-gold text-sm font-sans font-semibold hover:underline">← Torna al sito
+                principale</a>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HERO — Full-screen video                      -->
+    <!-- ============================================ -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden wave-divider">
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="Video2/eb_efficientamento_hero.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
+
+        <!-- 21st: Floating particles -->
+        <div id="hero-particles" class="absolute inset-0 pointer-events-none"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <div class="gold-line"></div>
+                <p id="hero-label"
+                    class="text-gold text-base font-sans font-semibold tracking-[0.3em] uppercase opacity-0">
+                    EB PORTALE ENERGIA</p>
+                <div class="gold-line"></div>
+            </div>
+
+            <h1 id="hero-title"
+                class="char-reveal font-serif text-white text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6">
+                EFFICIENTAMENTO<br>ENERGETICO
+            </h1>
+
+            <p id="hero-sub"
+                class="font-sans text-white/70 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed mb-10 opacity-0">
+                Fotovoltaico e Pompe di Calore — Risparmio Energetico, Zero Compromessi.
+            </p>
+
+            <div id="hero-btns" class="flex flex-wrap justify-center gap-4 opacity-0">
+                <a href="#contatti"
+                    class="magnetic-btn bg-gold hover:bg-amber-500 text-teal-brand font-semibold px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-105">
+                    Richiedi Preventivo
+                </a>
+                <a href="#pilastri"
+                    class="magnetic-btn border border-white/40 hover:border-white text-white font-medium px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-white/10">
+                    Scopri le Soluzioni
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+            <span class="text-white/50 text-xs tracking-widest uppercase font-sans">Scroll</span>
+            <div class="w-[1px] h-8 bg-gradient-to-b from-white/60 to-transparent animate-pulse"></div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- TRUST & AUTHORITY BADGES (UUPM)               -->
+    <!-- ============================================ -->
+    <section class="py-12 px-6 md:px-16 lg:px-24 bg-white border-b border-stone-200 relative overflow-hidden">
+        <div class="organic-blob w-[300px] h-[300px] bg-gold top-[-100px] right-[-100px] float-slow"></div>
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <div class="trust-badge flex flex-col items-center gap-2 px-6 py-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#C8A45A" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <span class="text-teal-brand text-xs font-semibold tracking-widest uppercase">Certificati GSE</span>
+                </div>
+                <div class="trust-badge flex flex-col items-center gap-2 px-6 py-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#C8A45A" stroke-width="1.5">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                    </svg>
+                    <span class="text-teal-brand text-xs font-semibold tracking-widest uppercase">Portale ENEA</span>
+                </div>
+                <div class="trust-badge flex flex-col items-center gap-2 px-6 py-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#C8A45A" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18" />
+                        <path d="M9 21V9" />
+                    </svg>
+                    <span class="text-teal-brand text-xs font-semibold tracking-widest uppercase">Classe A+</span>
+                </div>
+                <div class="trust-badge flex flex-col items-center gap-2 px-6 py-4 rounded-2xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#C8A45A" stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
+                    <span class="text-teal-brand text-xs font-semibold tracking-widest uppercase">Garanzia 25
+                        Anni</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- I DUE PILASTRI                                -->
+    <!-- ============================================ -->
+    <section id="pilastri" class="py-24 md:py-32 px-6 md:px-16 lg:px-24 relative overflow-hidden">
+        <div class="organic-blob w-[400px] h-[400px] bg-sage top-[100px] left-[-200px] float-medium"></div>
+        <div class="organic-blob w-[300px] h-[300px] bg-gold bottom-[50px] right-[-150px] float-slow"></div>
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <div class="gold-line"></div>
+                    <p class="text-gold text-sm font-sans font-semibold tracking-[0.3em] uppercase">Le Nostre Soluzioni
+                    </p>
+                    <div class="gold-line"></div>
+                </div>
+                <h2 class="font-serif text-teal-brand text-4xl md:text-5xl leading-tight mb-4 fade-in">
+                    I Due Pilastri dell'Efficienza
+                </h2>
+                <p class="text-charcoal/50 text-lg font-light max-w-xl mx-auto fade-in">
+                    Due tecnologie distinte che lavorano per un unico obiettivo: la tua autonomia energetica.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+
+                <!-- FOTOVOLTAICO -->
+                <div class="service-pillar bg-white rounded-3xl overflow-hidden shadow-sm fade-in">
+                    <div class="h-[280px] overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
+                            alt="Impianto Fotovoltaico" class="w-full h-full object-cover">
+                        <div class="absolute top-5 left-5">
+                            <span
+                                class="bg-gold/90 text-teal-brand text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">01</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <h3 class="font-serif text-teal-brand text-3xl mb-4">Impianto Fotovoltaico</h3>
+                        <p class="text-charcoal/60 text-sm font-light leading-relaxed mb-6">
+                            Il cuore della tua indipendenza. Trasforma la luce solare in energia elettrica pulita per
+                            alimentare tutta la tua casa.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <div class="benefit-check mt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-charcoal/70 text-sm">Indipendenza totale dai rincari della rete</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="benefit-check mt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-charcoal/70 text-sm">Produzione costante di energia green</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="benefit-check mt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-charcoal/70 text-sm">Aumento immediato del valore catastale</span>
+                            </li>
+                        </ul>
+                        <a href="#contatti"
+                            class="inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide hover:gap-3 transition-all">
+                            Scopri di più
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- POMPE DI CALORE -->
+                <div class="service-pillar bg-white rounded-3xl overflow-hidden shadow-sm fade-in">
+                    <div class="h-[280px] overflow-hidden relative">
+                        <img src="Fotovoltaico/hf_20260222_122827_f9379921-505b-425d-92c2-0a0715edb551.png"
+                            alt="Pompa di Calore" class="w-full h-full object-cover">
+                        <div class="absolute top-5 left-5">
+                            <span
+                                class="bg-gold/90 text-teal-brand text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">02</span>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <h3 class="font-serif text-teal-brand text-3xl mb-4">Pompa di Calore</h3>
+                        <p class="text-charcoal/60 text-sm font-light leading-relaxed mb-6">
+                            Il sistema termico più efficiente al mondo. Elimina definitivamente il gas e gestisci il
+                            clima con l'elettricità.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3">
+                                <div class="benefit-check mt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-charcoal/70 text-sm">Riscaldamento e raffrescamento Gas-Free</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="benefit-check mt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-charcoal/70 text-sm">Efficienza stagionale (SCOP) imbattibile</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="benefit-check mt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                        fill="none" stroke="white" stroke-width="3" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-charcoal/70 text-sm">Zero combustioni, massima sicurezza in
+                                    casa</span>
+                            </li>
+                        </ul>
+                        <a href="#contatti"
+                            class="inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide hover:gap-3 transition-all">
+                            Scopri di più
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SINERGIA — Il Ponte verso Zero Bollette      -->
+    <!-- ============================================ -->
+    <section id="sinergia" class="bg-teal-brand py-24 md:py-32 px-6 md:px-16 lg:px-24 relative overflow-hidden">
+        <div class="absolute top-[-150px] right-[-150px] w-[500px] h-[500px] rounded-full bg-gold/5"></div>
+        <div class="absolute bottom-[-100px] left-[-100px] w-[300px] h-[300px] rounded-full bg-white/3"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <div class="gold-line"></div>
+                    <p class="text-gold text-sm font-sans font-semibold tracking-[0.3em] uppercase">La Sinergia Perfetta
+                    </p>
+                    <div class="gold-line"></div>
+                </div>
+                <h2 class="font-serif text-white text-4xl md:text-5xl leading-tight mb-6 fade-in">
+                    Il Ponte verso "Zero Bollette"
+                </h2>
+                <p class="text-white/50 text-lg font-light max-w-2xl mx-auto fade-in">
+                    Quando il sole produce energia, la pompa di calore la utilizza per riscaldare l'acqua e gli
+                    ambienti. Un ecosistema che si auto-alimenta.
+                </p>
+            </div>
+
+            <!-- Sinergia visual -->
+            <div
+                class="sinergia-card bg-white/5 backdrop-blur-sm rounded-3xl p-10 md:p-14 border border-white/10 fade-in">
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gold/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5" />
+                                <line x1="12" y1="1" x2="12" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="23" />
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                <line x1="1" y1="12" x2="3" y2="12" />
+                                <line x1="21" y1="12" x2="23" y2="12" />
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                            </svg>
+                        </div>
+                        <h4 class="font-serif text-white text-xl mb-2">Fotovoltaico</h4>
+                        <p class="text-white/40 text-sm font-light">Produce energia pulita</p>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gold/20 flex items-center justify-center energy-orb">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="1.5">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-serif text-gold text-xl mb-2">Controllo AI</h4>
+                        <p class="text-white/40 text-sm font-light">Ottimizza ogni watt</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gold/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="1.5">
+                                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                                <path
+                                    d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94" />
+                            </svg>
+                        </div>
+                        <h4 class="font-serif text-white text-xl mb-2">Pompa di Calore</h4>
+                        <p class="text-white/40 text-sm font-light">Riscalda senza gas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- COUNTERS                                      -->
+    <!-- ============================================ -->
+    <section id="risparmio" class="py-20 md:py-24 px-6 md:px-16 lg:px-24 bg-white border-y border-stone-200">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14">
+                <h2 class="font-serif text-teal-brand text-3xl md:text-4xl leading-tight fade-in">Investimento in
+                    Libertà</h2>
+                <p class="text-charcoal/50 text-base font-light mt-3 max-w-xl mx-auto fade-in">L'efficientamento
+                    energetico è l'operazione finanziaria più sicura per proteggere il tuo patrimonio.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="fade-in">
+                    <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="70" data-suffix="%">0
+                    </p>
+                    <p class="text-charcoal/50 text-sm mt-2">Risparmio in Bolletta</p>
+                </div>
+                <div class="fade-in">
+                    <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="50" data-suffix="%">0
+                    </p>
+                    <p class="text-charcoal/50 text-sm mt-2">Detrazione Fiscale</p>
+                </div>
+                <div class="fade-in">
+                    <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="25" data-suffix="+">0
+                    </p>
+                    <p class="text-charcoal/50 text-sm mt-2">Anni di Durata</p>
+                </div>
+                <div class="fade-in">
+                    <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="0" data-suffix="">0
+                    </p>
+                    <p class="text-charcoal/50 text-sm mt-2">Emissioni CO₂</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PROCESSO                                       -->
+    <!-- ============================================ -->
+    <section class="py-24 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <div class="gold-line"></div>
+                    <p class="text-gold text-sm font-sans font-semibold tracking-[0.3em] uppercase">Come Lavoriamo</p>
+                    <div class="gold-line"></div>
+                </div>
+                <h2 class="font-serif text-teal-brand text-4xl md:text-5xl leading-tight fade-in">Il Nostro Processo
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="process-step text-center fade-in">
+                    <div
+                        class="w-16 h-16 mx-auto mb-5 rounded-full bg-teal-brand flex items-center justify-center shadow-lg shadow-teal-brand/20">
+                        <span class="text-gold font-serif text-xl">01</span>
+                    </div>
+                    <h4 class="font-serif text-teal-brand text-xl mb-2">Sopralluogo</h4>
+                    <p class="text-charcoal/50 text-sm font-light leading-relaxed">Valutiamo l'esposizione solare, i
+                        consumi storici e le caratteristiche dell'edificio.</p>
+                </div>
+                <div class="process-step text-center fade-in">
+                    <div
+                        class="w-16 h-16 mx-auto mb-5 rounded-full bg-teal-brand flex items-center justify-center shadow-lg shadow-teal-brand/20">
+                        <span class="text-gold font-serif text-xl">02</span>
+                    </div>
+                    <h4 class="font-serif text-teal-brand text-xl mb-2">Progettazione</h4>
+                    <p class="text-charcoal/50 text-sm font-light leading-relaxed">Dimensioniamo fotovoltaico e pompa di
+                        calore in perfetto equilibrio per massimizzare il risparmio.</p>
+                </div>
+                <div class="process-step text-center fade-in">
+                    <div
+                        class="w-16 h-16 mx-auto mb-5 rounded-full bg-teal-brand flex items-center justify-center shadow-lg shadow-teal-brand/20">
+                        <span class="text-gold font-serif text-xl">03</span>
+                    </div>
+                    <h4 class="font-serif text-teal-brand text-xl mb-2">Installazione</h4>
+                    <p class="text-charcoal/50 text-sm font-light leading-relaxed">I nostri tecnici certificati eseguono
+                        l'installazione completa con materiali di prima qualità.</p>
+                </div>
+                <div class="process-step text-center fade-in">
+                    <div
+                        class="w-16 h-16 mx-auto mb-5 rounded-full bg-teal-brand flex items-center justify-center shadow-lg shadow-teal-brand/20">
+                        <span class="text-gold font-serif text-xl">04</span>
+                    </div>
+                    <h4 class="font-serif text-teal-brand text-xl mb-2">Collaudo</h4>
+                    <p class="text-charcoal/50 text-sm font-light leading-relaxed">Gestione incentivi inclusa. Collaudo
+                        finale e monitoraggio delle performance garantite.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA CONTATTI                                   -->
+    <!-- ============================================ -->
+    <section id="contatti" class="bg-teal-brand py-24 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="gold-line mx-auto mb-8"></div>
+            <h2 class="font-serif text-white text-3xl md:text-5xl leading-tight mb-6 fade-in">
+                Inizia oggi il tuo efficientamento
+            </h2>
+            <p class="text-white/50 text-lg font-light max-w-xl mx-auto mb-4 fade-in">
+                Richiedi l'Analisi di Risparmio professionale. Analizziamo il tuo tetto e i tuoi consumi per garantirti
+                il miglior ritorno sull'investimento.
+            </p>
+            <p class="text-white/30 text-sm mb-10 fade-in">Servizio gratuito e senza impegno. Riceverai il report entro
+                24h.</p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="index.html#contatti"
+                    class="bg-gold hover:bg-amber-500 text-teal-brand font-semibold px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-105">
+                    Richiedi Analisi Gratuita
+                </a>
+                <a href="tel:+3907611576845"
+                    class="border border-white/40 hover:border-white text-white font-medium px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-white/10">
+                    Chiama Ora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================ -->
+    <footer class="bg-teal-brand py-24 px-6 md:px-16 lg:px-24 border-t border-white/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-1">
+                    <img src="Logo/logo-bianco.png" alt="Gruppo EB" class="h-12 mb-4">
+                    <p class="text-white/50 text-sm font-light leading-relaxed">Unico Interlocutore,<br>Zero Pensieri.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-lg tracking-wide mb-6">Soluzioni</h4>
+                    <a href="#pilastri"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Fotovoltaico</a>
+                    <a href="#pilastri" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Pompe
+                        di Calore</a>
+                    <a href="#sinergia"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Sinergia
+                        Integrata</a>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-lg tracking-wide mb-6">Link</h4>
+                    <a href="index.html" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Home
+                        Gruppo EB</a>
+                    <a href="portfolio.html"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Portfolio</a>
+                    <a href="news.html"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">News</a>
+                    <a href="index.html#contatti"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Contatti</a>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-lg tracking-wide mb-6">Contatti</h4>
+                    <p class="text-white/70 text-sm mb-2">Vetralla (VT) · Roma</p>
+                    <p class="text-white/70 text-sm mb-2">+39 076 115 76845</p>
+                    <p class="text-white/70 text-sm mb-4">info@gruppoeb.it</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">instagram
+                            <span>→</span></a>
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">facebook
+                            <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-white/40 text-xs tracking-wide">© 2026 Gruppo EB srl | P.IVA 02362920569 | Tutti i
+                    diritti riservati.</p>
+                <div class="flex items-center gap-6">
+                    <p class="text-white/30 text-xs italic">Made in Italy</p>
+                    <p class="text-white/50 text-xs font-medium tracking-wider uppercase">Powered by <span
+                            class="text-gold">Karim.ai</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FAB -->
+    <a href="https://wa.me/393917274650" target="_blank" rel="noopener"
+        class="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20BD5A] w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+        aria-label="Contattaci su WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS                                        -->
+    <!-- ============================================ -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // === HERO ENTRANCE (21st: Split text character reveal) ===
+        window.addEventListener('load', () => {
+            // Split hero title into characters
+            const heroTitle = document.getElementById('hero-title');
+            const html = heroTitle.innerHTML;
+            const lines = html.split('<br>');
+            heroTitle.innerHTML = lines.map(line =>
+                line.trim().split('').map(char =>
+                    char === ' ' ? ' ' : `<span class="char">${char}</span>`
+                ).join('')
+            ).join('<br>');
+
+            const tl = gsap.timeline({ delay: 0.4 });
+            tl.fromTo('#hero-label', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
+                .to('.char-reveal .char', {
+                    opacity: 1, y: 0, rotation: 0, filter: 'blur(0px)',
+                    duration: 0.6, stagger: 0.03, ease: 'back.out(1.7)'
+                }, '-=0.3')
+                .fromTo('#hero-sub', { y: 30, opacity: 0, filter: 'blur(6px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' }, '-=0.4')
+                .fromTo('#hero-btns', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4');
+
+            // 21st: Create hero particles
+            createHeroParticles();
+        });
+
+        // === NAVBAR SCROLL ===
+        const navbar = document.getElementById('navbar');
+        const logoImg = document.getElementById('nav-logo-img');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.remove('nav-glass');
+                navbar.classList.add('nav-solid');
+                logoImg.src = 'Logo/logo-trasparente.png';
+            } else {
+                navbar.classList.remove('nav-solid');
+                navbar.classList.add('nav-glass');
+                logoImg.src = 'Logo/logo-bianco.png';
+            }
+            // Scroll progress
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            document.getElementById('scroll-progress').style.width = (scrollTop / docHeight * 100) + '%';
+        });
+
+        // === FADE-IN ANIMATIONS (UUPM: staggered reveal) ===
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            const fadeEls = section.querySelectorAll('.fade-in');
+            fadeEls.forEach((el, i) => {
+                gsap.to(el, {
+                    y: 0, opacity: 1, duration: 0.8, delay: i * 0.1, ease: 'power2.out',
+                    scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+                });
+            });
+        });
+
+        // === UUPM: Parallax organic blobs ===
+        document.querySelectorAll('.organic-blob').forEach(blob => {
+            gsap.to(blob, {
+                y: -60,
+                scrollTrigger: { trigger: blob.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 }
+            });
+        });
+
+        // === UUPM: Trust badge entrance ===
+        document.querySelectorAll('.trust-badge').forEach((badge, i) => {
+            gsap.from(badge, {
+                y: 20, opacity: 0, duration: 0.6, delay: i * 0.12, ease: 'power2.out',
+                scrollTrigger: { trigger: badge, start: 'top 92%', toggleActions: 'play none none none' }
+            });
+        });
+
+        // === ANIMATED COUNTERS ===
+        document.querySelectorAll('.counter-num').forEach(counter => {
+            const target = parseInt(counter.dataset.target);
+            const suffix = counter.dataset.suffix || '';
+            gsap.to(counter, {
+                innerText: target, duration: 2.5, ease: 'power1.out', snap: { innerText: 1 },
+                scrollTrigger: { trigger: counter, start: 'top 88%', toggleActions: 'play none none none' },
+                onUpdate: function () {
+                    const val = Math.round(parseFloat(counter.textContent) || 0);
+                    counter.textContent = val + suffix;
+                }
+            });
+        });
+
+        // === UUPM: Process step stagger ===
+        document.querySelectorAll('.process-step').forEach((step, i) => {
+            gsap.from(step, {
+                y: 40, opacity: 0, scale: 0.95, duration: 0.7, delay: i * 0.15, ease: 'back.out(1.4)',
+                scrollTrigger: { trigger: step, start: 'top 88%', toggleActions: 'play none none none' }
+            });
+        });
+
+        // === SMOOTH SCROLL ===
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // === MOBILE MENU ===
+        document.getElementById('menu-toggle').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
+        document.getElementById('menu-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+        });
+
+        // === 21st: Magnetic button effect ===
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                btn.style.setProperty('--mouse-x', x + '%');
+                btn.style.setProperty('--mouse-y', y + '%');
+                const dx = (e.clientX - rect.left - rect.width / 2) * 0.15;
+                const dy = (e.clientY - rect.top - rect.height / 2) * 0.15;
+                btn.style.transform = `translate(${dx}px, ${dy}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // === 21st: Hero particles ===
+        function createHeroParticles() {
+            const container = document.getElementById('hero-particles');
+            if (!container) return;
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'hero-particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}%;top:${Math.random() * 100}%;opacity:0;`;
+                container.appendChild(particle);
+                gsap.to(particle, {
+                    y: -150 - Math.random() * 200,
+                    x: (Math.random() - 0.5) * 100,
+                    opacity: Math.random() * 0.6 + 0.2,
+                    duration: 4 + Math.random() * 6,
+                    repeat: -1,
+                    delay: Math.random() * 5,
+                    ease: 'none',
+                    onRepeat: function () {
+                        gsap.set(particle, { y: 0, x: 0, opacity: 0, left: Math.random() * 100 + '%', top: (70 + Math.random() * 30) + '%' });
+                    }
+                });
+            }
+        }
+
+        // === 21st: Service card 3D tilt ===
+        document.querySelectorAll('.service-pillar').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `translateY(-10px) perspective(800px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) perspective(800px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioedilizia: la Rivoluzione Verde | Gruppo EB</title>
+    <meta name="description"
+        content="Scopri come la bioedilizia sta trasformando il settore delle costruzioni. Materiali sostenibili, tecniche eco-compatibili e il futuro dell'edilizia verde.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'teal-brand': '#2D3E40', 'gold': '#C8A45A', 'off-white': '#F5F3EF', 'charcoal': '#1A1A1A' },
+                    fontFamily: { 'serif': ['Cormorant Garamond', 'Georgia', 'serif'], 'sans': ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        .nav-solid {
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-solid .nav-link,
+        .nav-solid .nav-logo {
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid .nav-link:hover {
+            color: #C8A45A !important;
+        }
+
+        .nav-solid .nav-cta {
+            background: #C8A45A !important;
+            color: #2D3E40 !important;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: #C8A45A;
+        }
+    </style>
+</head>
+
+<body class="bg-off-white font-sans text-charcoal overflow-x-hidden">
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gold z-[60]" style="width:0%"></div>
+
+    <!-- NAVBAR -->
+    <nav class="nav-solid fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between">
+        <a href="index.html" class="nav-logo flex items-center text-teal-brand"><img src="Logo/logo-trasparente.png"
+                alt="Gruppo EB" class="h-10"></a>
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="index.html#pilastri"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Servizi</a>
+            <a href="portfolio.html"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Portfolio</a>
+            <a href="news.html"
+                class="nav-link text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-gold">News</a>
+            <a href="index.html#contatti"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Contatti</a>
+            <a href="index.html#contatti"
+                class="nav-cta bg-gold text-teal-brand text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-amber-500">Preventivo
+                Gratuito</a>
+        </div>
+        <button id="menu-toggle" class="lg:hidden text-teal-brand" aria-label="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+        </button>
+    </nav>
+    <div id="mobile-menu"
+        class="mobile-menu fixed inset-0 z-50 bg-teal-brand flex flex-col justify-center items-start px-10 gap-6">
+        <button id="menu-close" class="absolute top-6 right-6 text-white" aria-label="Chiudi"><svg
+                xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg></button>
+        <a href="index.html#pilastri" class="mobile-link text-white text-3xl font-serif italic">Servizi</a>
+        <a href="portfolio.html" class="mobile-link text-white text-3xl font-serif italic">Portfolio</a>
+        <a href="news.html" class="mobile-link text-gold text-3xl font-serif italic">News</a>
+        <a href="index.html#contatti" class="mobile-link text-white text-3xl font-serif italic">Contatti</a>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <section class="relative pt-20">
+        <div class="h-[50vh] md:h-[60vh] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1200&q=80" alt="Bioedilizia"
+                class="w-full h-full object-cover">
+        </div>
+    </section>
+
+    <!-- ARTICLE -->
+    <article class="max-w-3xl mx-auto px-6 md:px-8 py-16 md:py-20">
+        <div class="flex items-center gap-3 mb-6">
+            <a href="news.html" class="text-gold text-sm font-semibold hover:underline">← Torna alle news</a>
+        </div>
+        <div class="flex items-center gap-3 mb-6">
+            <span
+                class="text-gold text-xs font-semibold tracking-widest uppercase bg-gold/10 px-3 py-1 rounded-full">Edilizia</span>
+            <span class="text-charcoal/40 text-xs font-medium">15 Feb 2025</span>
+        </div>
+
+        <h1 id="article-title" class="font-serif text-teal-brand text-4xl md:text-5xl leading-tight mb-8 opacity-0">
+            Bioedilizia: la Rivoluzione Verde nel Settore delle Costruzioni
+        </h1>
+
+        <div class="prose prose-lg max-w-none">
+            <p class="text-charcoal/70 text-lg font-light leading-relaxed mb-6">
+                La bioedilizia rappresenta un cambio di paradigma fondamentale nel settore delle costruzioni. Non si
+                tratta più solo di costruire edifici, ma di progettare spazi abitativi che rispettino l&#39;ambiente,
+                riducano l&#39;impatto energetico e garantiscano il benessere dei loro occupanti.
+            </p>
+
+            <h2 class="font-serif text-teal-brand text-2xl mt-12 mb-4">Materiali Sostenibili: il Cuore della Bioedilizia
+            </h2>
+            <p class="text-charcoal/70 text-base font-light leading-relaxed mb-6">
+                Il legno lamellare, la canapa, il sughero e la calce naturale sono solo alcuni dei materiali che stanno
+                rivoluzionando il modo in cui costruiamo. Questi materiali non solo offrono prestazioni termiche
+                eccellenti, ma hanno anche un&#39;impronta di carbonio significativamente inferiore rispetto ai
+                materiali tradizionali come il cemento e l&#39;acciaio.
+            </p>
+            <p class="text-charcoal/70 text-base font-light leading-relaxed mb-6">
+                In Italia, la bioedilizia sta vivendo un momento di crescita senza precedenti. Secondo i dati di
+                Legambiente, nel 2024 sono stati certificati oltre 1.500 edifici con standard di sostenibilità LEED o
+                BREEAM, con un incremento del 35% rispetto all&#39;anno precedente.
+            </p>
+
+            <h2 class="font-serif text-teal-brand text-2xl mt-12 mb-4">Tecniche Costruttive Eco-Compatibili</h2>
+            <p class="text-charcoal/70 text-base font-light leading-relaxed mb-6">
+                Le case in legno X-Lam (Cross Laminated Timber) sono un esempio perfetto di come la tecnologia moderna
+                possa coniugarsi con la sostenibilità. Queste strutture offrono resistenza sismica superiore, isolamento
+                termico eccellente e tempi di costruzione ridotti fino al 60% rispetto alle tecniche tradizionali.
+            </p>
+            <p class="text-charcoal/70 text-base font-light leading-relaxed mb-6">
+                Un altro aspetto fondamentale è l&#39;efficienza energetica. Gli edifici bioedili sono progettati per
+                minimizzare il consumo energetico attraverso l&#39;utilizzo di pannelli solari integrati, sistemi di
+                recupero dell&#39;acqua piovana e ventilazione meccanica controllata con recupero di calore.
+            </p>
+
+            <h2 class="font-serif text-teal-brand text-2xl mt-12 mb-4">Il Futuro dell&#39;Edilizia è Verde</h2>
+            <p class="text-charcoal/70 text-base font-light leading-relaxed mb-6">
+                La Direttiva Europea sulle Case Green (EPBD) impone che tutti i nuovi edifici siano a emissioni zero
+                entro il 2030 e che gli edifici esistenti raggiungano la classe energetica E entro il 2033. Questo
+                significa che la bioedilizia non è più un&#39;opzione, ma una necessità.
+            </p>
+            <p class="text-charcoal/70 text-base font-light leading-relaxed mb-6">
+                Noi di Gruppo EB siamo all&#39;avanguardia in questo campo. I nostri progetti integrano materiali
+                sostenibili, tecnologie per l&#39;efficienza energetica e un design che mette al centro il benessere
+                delle persone.
+            </p>
+
+            <div class="bg-teal-brand/5 rounded-2xl p-8 mt-12 border-l-4 border-gold">
+                <p class="text-teal-brand text-base font-medium leading-relaxed italic">
+                    "Il futuro dell&#39;edilizia non è fatto solo di mattoni e cemento, ma di visione, sostenibilità e
+                    rispetto per il territorio. Ogni progetto è un&#39;opportunità per costruire un mondo migliore."
+                </p>
+                <p class="text-gold text-sm font-semibold mt-4">— Gruppo EB</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 pt-12 border-t border-stone-200 text-center">
+            <h3 class="font-serif text-teal-brand text-2xl mb-4">Interessato alla bioedilizia?</h3>
+            <p class="text-charcoal/50 text-base mb-8">Contattaci per scoprire come possiamo realizzare il tuo progetto
+                sostenibile.</p>
+            <a href="index.html#contatti"
+                class="bg-gold hover:bg-amber-500 text-teal-brand font-semibold px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-105 inline-block">Richiedi
+                Preventivo</a>
+        </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer class="bg-teal-brand py-12 px-6 md:px-16 lg:px-24">
+        <div
+            class="max-w-6xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-white/40 text-xs tracking-wide">© 2026 Gruppo EB srl | P.IVA 02362920569 | Tutti i diritti
+                riservati.</p>
+            <div class="flex items-center gap-6">
+                <p class="text-white/30 text-xs italic text-center md:text-left">Made in Italy</p>
+                <div class="flex items-center gap-4">
+                    <a href="news.html" class="text-white/50 hover:text-gold text-xs transition-colors">← Tutte le
+                        news</a>
+                    <p class="text-white/50 text-xs font-medium tracking-wider uppercase">Powered by <span
+                            class="text-gold">Karim.ai</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/393917274650" target="_blank" rel="noopener"
+        class="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20BD5A] w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+        aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <script>
+        window.addEventListener('load', () => { gsap.fromTo('#article-title', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }); });
+        window.addEventListener('scroll', () => { document.getElementById('scroll-progress').style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%'; });
+        document.getElementById('menu-toggle').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
+        document.getElementById('menu-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+    </script>
+</body>
+
+</html>

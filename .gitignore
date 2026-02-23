@@ -1,0 +1,7 @@
+.DS_Store
+.gemini/
+*.log
+node_modules/
+.vscode/
+.idea/
+.env

@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gruppo EB | Edilizia, Infissi e Serramenti, Efficientamento Energetico</title>
+    <meta name="description"
+        content="Gruppo EB — Edilizia, Efficientamento Energetico e Infissi e Serramenti. Unico Interlocutore, Zero Pensieri. Ristrutturazioni chiavi in mano, infissi di design e soluzioni fotovoltaiche a Vetralla e Roma.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-brand': '#2D3E40',
+                        'off-white': '#F7F5F2',
+                        'gold': '#C8A45A',
+                        'sage': '#A8B5A0',
+                        'charcoal': '#2D2D2D',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: #C8A45A #2D3E40;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2D3E40;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C8A45A;
+            border-radius: 3px;
+        }
+
+        /* Loading screen */
+        .loader-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #2D3E40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-logo {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes loader-fade {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .loader-logo {
+            animation: loader-fade 1.5s ease-in-out infinite;
+        }
+
+        /* Glassmorphism navbar */
+        .nav-glass {
+            background: rgba(45, 62, 64, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-solid {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-solid .nav-link {
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid .nav-logo {
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid .nav-logo img {
+            filter: none;
+        }
+
+        .nav-solid .nav-cta {
+            background: #C8A45A !important;
+            color: #2D3E40 !important;
+        }
+
+        /* Ticker animation */
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .ticker-track {
+            animation: ticker-scroll 25s linear infinite;
+        }
+
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Partner logos marquee — 21st.dev inspired */
+        @keyframes partner-scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .partner-marquee {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient fade edges — like 21st.dev Marquee */
+        .partner-marquee::before,
+        .partner-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .partner-marquee::before {
+            left: 0;
+            background: linear-gradient(to right, white, transparent);
+        }
+
+        .partner-marquee::after {
+            right: 0;
+            background: linear-gradient(to left, white, transparent);
+        }
+
+        .partner-track {
+            animation: partner-scroll 25s linear infinite;
+            will-change: transform;
+        }
+
+        .partner-track:hover {
+            animation-play-state: paused;
+        }
+
+        .partner-track img {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .partner-track img:hover {
+            transform: scale(1.12);
+        }
+
+        /* Hero gradient overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg,
+                    rgba(45, 62, 64, 0.75) 0%,
+                    rgba(45, 62, 64, 0.4) 50%,
+                    rgba(45, 62, 64, 0.2) 100%);
+        }
+
+        /* Scroll chevron animation */
+        @keyframes bounce-down {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(12px);
+                opacity: 1;
+            }
+        }
+
+        .scroll-chevron {
+            animation: bounce-down 2s ease-in-out infinite;
+        }
+
+        /* Card hover effects — 21st.dev 3D Tilt inspired */
+        .sector-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .sector-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow:
+                0 25px 60px -15px rgba(45, 62, 64, 0.3),
+                0 0 0 1px rgba(200, 164, 90, 0.15);
+        }
+
+        .sector-card img {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sector-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .sector-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .sector-card:hover .card-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Glassmorphism overlay — 21st.dev Glass Card */
+        .card-overlay {
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(2px);
+        }
+
+        .card-btn {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+
+        /* Gold border glow on hover — Comet Card style */
+        .sector-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 1.5px;
+            background: linear-gradient(135deg, transparent 40%, rgba(200, 164, 90, 0.5) 50%, transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .sector-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Magnetic CTA buttons */
+        .cta-magnetic {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-magnetic::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .cta-magnetic:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Parallax image styling */
+        .parallax-img {
+            will-change: transform;
+            transition: none;
+        }
+
+        /* Gold line separator animation */
+        .gold-line {
+            width: 0;
+            height: 2px;
+            background: #C8A45A;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gold-line.active {
+            width: 80px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .ticker-track {
+                animation: none !important;
+            }
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* WhatsApp pulse */
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .whatsapp-pulse::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: #25D366;
+            animation: pulse-ring 2s ease-out infinite;
+            z-index: -1;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: #C8A45A;
+            color: white;
+        }
+
+        /* Section reveal clip */
+        .reveal-up {
+            clip-path: inset(100% 0 0 0);
+            transition: clip-path 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-up.revealed {
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* Stagger children */
+        .stagger-child {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Counter glow */
+        .counter-num {
+            text-shadow: 0 0 40px rgba(200, 164, 90, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-off-white font-sans text-charcoal overflow-x-hidden">
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-screen">
+        <span class="loader-logo">GRUPPO EB</span>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gold z-[60]" style="width:0%"></div>
+
+    <!-- ============================================ -->
+    <!-- NAVBAR -->
+    <!-- ============================================ -->
+    <nav id="navbar"
+        class="nav-glass fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="nav-logo flex items-center text-white transition-colors duration-300">
+            <img src="Logo/logo-trasparente.png" alt="Gruppo EB" class="h-10 brightness-0 invert">
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="#pilastri"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Servizi</a>
+            <a href="portfolio.html"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Portfolio</a>
+            <a href="news.html"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">News</a>
+            <a href="#contatti"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Contatti</a>
+            <a href="tel:+3907611576845"
+                class="nav-link text-white/90 hover:text-gold text-sm font-medium tracking-wide transition-colors flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                +39 076 115 76845
+            </a>
+            <a href="#contatti"
+                class="nav-cta bg-white/20 hover:bg-gold text-white hover:text-teal-brand text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300">
+                Preventivo Gratuito
+            </a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button id="menu-toggle" class="lg:hidden text-white z-60 relative" aria-label="Menu">
+            <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="mobile-menu fixed inset-0 z-50 bg-teal-brand flex flex-col justify-center items-start px-10 gap-6">
+        <button id="menu-close" class="absolute top-6 right-6 text-white" aria-label="Chiudi menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+        <a href="#pilastri" class="mobile-link text-white text-3xl font-serif italic">Servizi</a>
+        <a href="portfolio.html" class="mobile-link text-white text-3xl font-serif italic">Portfolio</a>
+        <a href="news.html" class="mobile-link text-white text-3xl font-serif italic">News</a>
+        <a href="#contatti" class="mobile-link text-white text-3xl font-serif italic">Contatti</a>
+        <div class="mt-8 pt-8 border-t border-white/20 w-full text-center lg:text-left">
+            <p class="text-white/60 text-sm font-sans">+39 076 115 76845 · info@gruppoeb.it</p>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================ -->
+    <section id="hero" class="relative h-screen w-full overflow-hidden">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"
+            poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80">
+            <source src="Video/gruppo_eb_hero.mp4" type="video/mp4">
+        </video>
+
+        <!-- Overlay -->
+        <div class="hero-overlay absolute inset-0"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 h-full flex flex-col justify-center px-6 md:px-16 lg:px-24 max-w-5xl">
+            <h1 id="hero-headline"
+                class="font-serif text-white text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6 opacity-0">
+                il tuo progetto<br>comincia qui
+            </h1>
+            <p id="hero-sub"
+                class="font-sans text-white/70 text-lg md:text-xl font-light max-w-xl mb-10 leading-relaxed opacity-0">
+                Edilizia, Efficientamento Energetico e Infissi e Serramenti — Unico Interlocutore, Zero Pensieri.
+            </p>
+            <div id="hero-ctas" class="flex flex-wrap gap-4 opacity-0">
+                <a href="#contatti"
+                    class="cta-magnetic bg-gold hover:bg-amber-500 text-teal-brand font-semibold px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-105 cursor-pointer">
+                    Richiedi Preventivo
+                </a>
+                <a href="#portfolio"
+                    class="cta-magnetic border border-white/40 hover:border-white text-white font-medium px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-white/10 cursor-pointer">
+                    Scopri i Nostri Lavori
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Chevron -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 scroll-chevron">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+                <polyline points="6 9 12 15 18 9" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SCROLLING TICKER BAR -->
+    <!-- ============================================ -->
+    <div class="bg-teal-brand py-8 overflow-hidden relative z-20 -mt-20">
+        <div class="ticker-track flex whitespace-nowrap">
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">EDILIZIA</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">INFISSI
+                E SERRAMENTI</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">RISTRUTTURAZIONI</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">FOTOVOLTAICO</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">NUOVE
+                COSTRUZIONI</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">EFFICIENTAMENTO
+                ENERGETICO</span>
+            <span class="text-gold text-sm">•</span>
+            <!-- Duplicate for seamless loop -->
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">EDILIZIA</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">INFISSI
+                E SERRAMENTI</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">RISTRUTTURAZIONI</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">FOTOVOLTAICO</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">NUOVE
+                COSTRUZIONI</span>
+            <span class="text-gold text-sm">•</span>
+            <span
+                class="text-white/50 text-sm md:text-base font-sans font-semibold tracking-[0.3em] uppercase mx-8">EFFICIENTAMENTO
+                ENERGETICO</span>
+            <span class="text-gold text-sm">•</span>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- I TRE PILASTRI — Services Hub -->
+    <!-- ============================================ -->
+    <section id="pilastri" class="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-off-white">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <p class="text-gold text-sm font-sans font-semibold tracking-[0.2em] uppercase mb-4 fade-in">i tre pilastri
+            </p>
+            <h2 class="font-serif text-teal-brand text-3xl md:text-5xl lg:text-6xl leading-tight mb-6 fade-in">
+                Costruiamo il Futuro,<br>Onorando la Storia.
+            </h2>
+            <p class="text-charcoal/60 text-lg font-light max-w-2xl mb-16 fade-in">
+                Unico interlocutore per una gestione impeccabile dalla progettazione alla realizzazione finale.
+            </p>
+
+            <!-- 3 Sector Cards — Masonry Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Card 1: Edilizia -->
+                <div class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[420px]">
+                    <img src="Edilizia/hf_20260222_123222_2258c49c-d5db-4d8d-b301-cde35520b171.png"
+                        alt="Edilizia e Ristrutturazioni" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/40 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-sans font-semibold tracking-[0.2em] uppercase mb-2">01</p>
+                        <h3 class="font-serif text-white text-4xl mb-3 [text-shadow:0_2px_10px_rgba(200,164,90,0.5)]">
+                            EDILIZIA</h3>
+                        <p class="text-white/80 text-sm font-light leading-relaxed mb-6">
+                            Ristrutturazioni chiavi in mano e nuove costruzioni. Eccellenza strutturale e cura maniacale
+                            per il dettaglio architettonico.
+                        </p>
+                        <a href="#"
+                            class="card-btn inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide hover:gap-3 transition-all">
+                            Scopri di più
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                    <!-- Default label -->
+                    <div class="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                        <h3 class="font-serif text-white text-3xl [text-shadow:0_2px_15px_rgba(0,0,0,0.8)]">EDILIZIA
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- Card 2: Efficientamento Energetico -->
+                <div onclick="window.location.href='efficientamento-energetico.html'"
+                    class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[420px] min-h-[420px]">
+                    <img src="Fotovoltaico/hf_20260222_122827_f9379921-505b-425d-92c2-0a0715edb551.png"
+                        alt="Efficientamento Energetico" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/40 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-sans font-semibold tracking-[0.2em] uppercase mb-2">02</p>
+                        <h3 class="font-serif text-white text-4xl mb-3 [text-shadow:0_2px_10px_rgba(200,164,90,0.5)]">
+                            EFFICIENTAMENTO ENERGETICO</h3>
+                        <p class="text-white/80 text-sm font-light leading-relaxed mb-6">
+                            Soluzioni fotovoltaiche e risparmio energetico d'avanguardia. Trasformiamo gli edifici in
+                            ecosistemi autosufficienti.
+                        </p>
+                        <a href="efficientamento-energetico.html"
+                            class="card-btn inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide hover:gap-3 transition-all">
+                            Scopri di più
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                        <h3
+                            class="font-serif text-white text-3xl leading-tight [text-shadow:0_2px_15px_rgba(0,0,0,0.8)]">
+                            EFFICIENTAMENTO<br>ENERGETICO</h3>
+                    </div>
+                </div>
+
+                <!-- Card 3: Infissi e Serramenti -->
+                <div
+                    class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[420px] min-h-[420px]">
+                    <img src="Infissi/hf_20260222_120231_8616115f-31bc-4626-93fa-c3a6a0868a09.png"
+                        alt="Infissi e Serramenti" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/40 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-sans font-semibold tracking-[0.2em] uppercase mb-2">03</p>
+                        <h3 class="font-serif text-white text-4xl mb-3 [text-shadow:0_2px_10px_rgba(200,164,90,0.5)]">
+                            INFISSI E SERRAMENTI</h3>
+                        <p class="text-white/80 text-sm font-light leading-relaxed mb-6">
+                            Serramenti di design ad alte prestazioni termiche. Estetica minimale e isolamento
+                            termoacustico superiore con profili Schuco, Salamander e Ponzio.
+                        </p>
+                        <a href="#"
+                            class="card-btn inline-flex items-center gap-2 text-gold text-sm font-semibold tracking-wide hover:gap-3 transition-all">
+                            Scopri di più
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="absolute bottom-6 left-6 group-hover:opacity-0 transition-opacity duration-300">
+                        <h3 class="font-serif text-white text-3xl [text-shadow:0_2px_15px_rgba(0,0,0,0.8)]">INFISSI
+                            E<br>SERRAMENTI</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PARTNER LOGOS SLIDER -->
+    <!-- ============================================ -->
+    <section class="bg-white py-16 md:py-20 border-t border-b border-stone-100">
+        <p
+            class="text-center text-teal-brand text-lg md:text-xl font-semibold tracking-[0.3em] uppercase mb-10 fade-in">
+            I Nostri Partner</p>
+        <div class="partner-marquee">
+            <div class="partner-track flex items-center whitespace-nowrap">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939639.jpg?1726827282998"
+                    alt="Partner 1"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939710.jpg?1726827285436"
+                    alt="Partner 2"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939699.jpg?1726827286984"
+                    alt="Partner 3"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939690.jpg?1726827288407"
+                    alt="Partner 4"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939682.jpg?1726827289732"
+                    alt="Partner 5"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939672.jpg?1726827291467"
+                    alt="Partner 6"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939615.jpg?1726827292577"
+                    alt="Partner 7"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939623.jpg?1726827293842"
+                    alt="Partner 8"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939631.jpg?1726827294935"
+                    alt="Partner 9"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939647.jpg?1726827296157"
+                    alt="Partner 10"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <!-- Duplicate for seamless loop -->
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939639.jpg?1726827282998"
+                    alt="Partner 1"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939710.jpg?1726827285436"
+                    alt="Partner 2"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939699.jpg?1726827286984"
+                    alt="Partner 3"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939690.jpg?1726827288407"
+                    alt="Partner 4"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939682.jpg?1726827289732"
+                    alt="Partner 5"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939672.jpg?1726827291467"
+                    alt="Partner 6"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939615.jpg?1726827292577"
+                    alt="Partner 7"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939623.jpg?1726827293842"
+                    alt="Partner 8"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939631.jpg?1726827294935"
+                    alt="Partner 9"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img src="https://uploads3.fw360.it/uploads/env/4/7202/img/sliders/tn/1726821939647.jpg?1726827296157"
+                    alt="Partner 10"
+                    class="h-56 md:h-72 mx-10 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- ANIMATED COUNTERS -->
+    <!-- ============================================ -->
+    <section class="bg-teal-brand py-20 md:py-24 px-6 md:px-16 lg:px-24">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="fade-in">
+                <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="30" data-suffix="+">0</p>
+                <p class="text-white/60 text-sm mt-2">Anni di Esperienza</p>
+            </div>
+            <div class="fade-in">
+                <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="100" data-suffix="%">0</p>
+                <p class="text-white/60 text-sm mt-2">Clienti Soddisfatti</p>
+            </div>
+            <div class="fade-in">
+                <p class="counter-num font-serif text-gold text-5xl md:text-6xl" data-target="100" data-suffix="+">0</p>
+                <p class="text-white/60 text-sm mt-2">Progetti Realizzati</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PHILOSOPHY QUOTE -->
+    <!-- ============================================ -->
+    <section class="bg-off-white py-24 md:py-32 px-6 md:px-16 lg:px-24">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <div class="gold-line mx-auto mb-8"></div>
+            <blockquote class="font-serif text-teal-brand text-2xl md:text-4xl leading-relaxed italic mb-8">
+                "Il nostro approccio come unico interlocutore garantisce la coerenza tra visione architettonica,
+                efficienza energetica e qualità esecutiva."
+            </blockquote>
+            <p class="text-gold text-sm font-sans font-semibold tracking-[0.2em] uppercase">Filosofia Gruppo EB</p>
+            <div class="gold-line mx-auto mt-8"></div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PORTFOLIO — Opere Scelte -->
+    <!-- ============================================ -->
+    <section id="portfolio" class="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-off-white">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-gold text-sm font-sans font-semibold tracking-[0.2em] uppercase mb-4 fade-in">portfolio</p>
+            <h2 class="font-serif text-teal-brand text-3xl md:text-5xl leading-tight mb-4 fade-in">Opere Scelte</h2>
+            <p class="text-charcoal/60 text-lg font-light max-w-2xl mb-16 fade-in">
+                Una curatela dei nostri progetti più significativi, dove la forma incontra la funzione.
+            </p>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <div class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[350px]">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+                        alt="Villa Moderna" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/80 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-1">Edilizia</p>
+                        <h3 class="font-serif text-white text-2xl">Villa Moderna — Roma</h3>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[350px]">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+                        alt="Parco Commerciale" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/80 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-1">Infissi e Serramenti
+                        </p>
+                        <h3 class="font-serif text-white text-2xl">Parco Commerciale Città Dei Papi</h3>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[350px]">
+                    <img src="Infissi/hf_20260222_120231_8616115f-31bc-4626-93fa-c3a6a0868a09.png" alt="Progetto Findus"
+                        class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/80 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-1">Ristrutturazione</p>
+                        <h3 class="font-serif text-white text-2xl">Progetto Findus — Uffici</h3>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="sector-card relative rounded-2xl overflow-hidden cursor-pointer group h-[350px]">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
+                        alt="Impianto Fotovoltaico" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/80 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-1">Fotovoltaico</p>
+                        <h3 class="font-serif text-white text-2xl">Impianto Fotovoltaico Residenziale</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in">
+                <a href="portfolio.html"
+                    class="inline-flex items-center gap-2 bg-teal-brand hover:bg-teal-brand/90 text-white font-semibold text-sm tracking-wide px-8 py-3.5 rounded-full transition-all duration-300 hover:scale-105 hover:gap-3">
+                    Scopri di più
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================ -->
+    <!-- NEWS -->
+    <!-- ============================================ -->
+    <section class="bg-off-white py-20 md:py-24 px-6 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-gold text-sm font-sans font-semibold tracking-[0.2em] uppercase mb-4 fade-in">news</p>
+            <h2 class="font-serif text-teal-brand text-3xl md:text-5xl leading-tight mb-4 fade-in">Ultimi Aggiornamenti
+            </h2>
+            <p class="text-charcoal/60 text-lg font-light max-w-2xl mb-16 fade-in">Tendenze, innovazioni e novità dal
+                mondo dell'edilizia e dell'efficienza energetica.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="group cursor-pointer fade-in">
+                    <div class="rounded-2xl overflow-hidden mb-5 h-[240px]">
+                        <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=80"
+                            alt="Bioedilizia"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-charcoal/40 text-xs font-semibold tracking-widest uppercase mb-2">15 Feb 2025</p>
+                    <h3 class="font-serif text-teal-brand text-xl mb-2 group-hover:text-gold transition-colors">
+                        Bioedilizia: la Rivoluzione Verde nel Settore delle Costruzioni</h3>
+
+                </div>
+                <!-- Article 2 -->
+                <div class="group cursor-pointer fade-in">
+                    <div class="rounded-2xl overflow-hidden mb-5 h-[240px]">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
+                            alt="Innovazioni Sismiche"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-charcoal/40 text-xs font-semibold tracking-widest uppercase mb-2">02 Feb 2025</p>
+                    <h3 class="font-serif text-teal-brand text-xl mb-2 group-hover:text-gold transition-colors">
+                        Innovazioni Sismiche: Costruire per Resistere</h3>
+
+                </div>
+                <!-- Article 3 -->
+                <div class="group cursor-pointer fade-in">
+                    <div class="rounded-2xl overflow-hidden mb-5 h-[240px]">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80"
+                            alt="Superbonus"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p class="text-charcoal/40 text-xs font-semibold tracking-widest uppercase mb-2">20 Gen 2025</p>
+                    <h3 class="font-serif text-teal-brand text-xl mb-2 group-hover:text-gold transition-colors">Bonus
+                        Casa 2025: Tutte le Agevolazioni Disponibili</h3>
+
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in">
+                <a href="news.html"
+                    class="inline-flex items-center gap-2 bg-teal-brand hover:bg-teal-brand/90 text-white font-semibold text-sm tracking-wide px-8 py-3.5 rounded-full transition-all duration-300 hover:scale-105 hover:gap-3">
+                    Scopri di più
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTATTI -->
+    <!-- ============================================ -->
+    <section id="contatti" class="py-24 md:py-32 px-6 md:px-16 lg:px-24 bg-off-white">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-gold text-sm font-sans font-semibold tracking-[0.2em] uppercase mb-4 fade-in">contatti</p>
+            <h2 class="font-serif text-teal-brand text-3xl md:text-5xl leading-tight mb-16 fade-in">Parliamo del tuo
+                progetto.</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Form -->
+                <form class="space-y-5 fade-in" onsubmit="event.preventDefault()">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="Nome"
+                            class="w-full bg-white border border-stone-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors">
+                        <input type="text" placeholder="Cognome"
+                            class="w-full bg-white border border-stone-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors">
+                    </div>
+                    <input type="email" placeholder="Email"
+                        class="w-full bg-white border border-stone-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors">
+                    <input type="tel" placeholder="Telefono"
+                        class="w-full bg-white border border-stone-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors">
+                    <select
+                        class="w-full bg-white border border-stone-200 rounded-xl px-5 py-3.5 text-sm text-charcoal/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors">
+                        <option value="">Tipo di intervento</option>
+                        <option>Ristrutturazione</option>
+                        <option>Infissi e Serramenti</option>
+                        <option>Fotovoltaico</option>
+                        <option>Efficientamento Energetico</option>
+                        <option>Nuova Costruzione</option>
+                        <option>Altro</option>
+                    </select>
+                    <textarea placeholder="Messaggio" rows="4"
+                        class="w-full bg-white border border-stone-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors resize-none"></textarea>
+                    <button type="submit"
+                        class="w-full bg-gold hover:bg-amber-500 text-teal-brand font-semibold py-4 rounded-xl text-sm tracking-wide transition-all duration-300 hover:scale-[1.02]">
+                        Invia Richiesta
+                    </button>
+                </form>
+
+                <!-- Contact Info -->
+                <div class="space-y-8 fade-in">
+                    <div>
+                        <h4 class="font-serif text-teal-brand text-xl mb-3">Sede Vetralla</h4>
+                        <p class="text-charcoal/60 text-sm leading-relaxed">
+                            Via della Forestale 1<br>
+                            Vetralla (VT), 01019
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-teal-brand text-xl mb-3">Sede Roma</h4>
+                        <p class="text-charcoal/60 text-sm leading-relaxed">
+                            Viale Giulio Cesare 71<br>
+                            Roma, 00192
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-stone-200">
+                        <div class="flex items-center gap-3 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                            <a href="tel:+3907611576845"
+                                class="text-charcoal hover:text-gold text-sm transition-colors">+39 076 115 76845</a>
+                        </div>
+                        <div class="flex items-center gap-3 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg>
+                            <a href="https://wa.me/393917274650"
+                                class="text-charcoal hover:text-gold text-sm transition-colors">WhatsApp +39 391 727
+                                4650</a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="#C8A45A" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            <a href="mailto:info@gruppoeb.it"
+                                class="text-charcoal hover:text-gold text-sm transition-colors">info@gruppoeb.it</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <footer class="bg-teal-brand py-24 px-6 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Col 1: Brand -->
+                <div>
+                    <div class="flex items-center text-white mb-4">
+                        <img src="Logo/logo-bianco.png" alt="Gruppo EB" class="h-9">
+                    </div>
+                    <p class="text-white/50 text-sm leading-relaxed">
+                        Edilizia e Infissi e Serramenti<br>
+                        Unico Interlocutore, Zero Pensieri.
+                    </p>
+                </div>
+                <div>
+                    <p class="text-white font-serif text-lg tracking-wide mb-6">Settori</p>
+                    <a href="#" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Edilizia</a>
+                    <a href="#"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Efficientamento
+                        Energetico</a>
+                    <a href="#" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Infissi e
+                        Serramenti</a>
+                </div>
+                <div>
+                    <p class="text-white font-serif text-lg tracking-wide mb-6">Link Utili</p>
+                    <a href="#" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Chi Siamo</a>
+                    <a href="#" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">I Nostri
+                        Lavori</a>
+                    <a href="#" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Contatti</a>
+                    <a href="#" class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Privacy
+                        Policy</a>
+                </div>
+                <div>
+                    <p class="text-white font-serif text-lg tracking-wide mb-6">Social</p>
+                    <div class="flex flex-col gap-2">
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">
+                            instagram <span>→</span>
+                        </a>
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">
+                            linkedin <span>→</span>
+                        </a>
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">
+                            facebook <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-white/40 text-xs tracking-wide">© 2026 Gruppo EB srl | P.IVA 02362920569 | Tutti i
+                    diritti riservati.</p>
+                <div class="flex items-center gap-6">
+                    <p class="text-white/30 text-xs italic">Made in Italy</p>
+                    <p class="text-white/50 text-xs font-medium tracking-wider uppercase">Powered by <span
+                            class="text-gold">Karim.ai</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <!-- ============================================ -->
+    <a href="https://wa.me/393917274650" target="_blank" rel="noopener"
+        class="whatsapp-pulse fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20BD5A] w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+        aria-label="Contattaci su WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <!-- ============================================ -->
+    <!-- GSAP ANIMATIONS -->
+    <!-- ============================================ -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // === LOADER ===
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            gsap.to(loader, {
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.6,
+                ease: 'power2.inOut',
+                onComplete: () => loader.classList.add('hidden')
+            });
+
+            // === CINEMATIC HERO ENTRANCE (staged reveal) ===
+            const heroTl = gsap.timeline({ delay: 1.0 });
+
+            // 1) Headline — slides up with mask reveal + slight scale
+            heroTl.fromTo('#hero-headline',
+                { y: 80, opacity: 0, scale: 0.97 },
+                { y: 0, opacity: 1, scale: 1, duration: 1.4, ease: 'power4.out' }
+            )
+
+                // 2) Subtitle — fades in with blur-to-sharp effect
+                .fromTo('#hero-sub',
+                    { y: 30, opacity: 0, filter: 'blur(8px)' },
+                    { y: 0, opacity: 0.7, filter: 'blur(0px)', duration: 1.0, ease: 'power3.out' },
+                    '-=0.7'
+                )
+
+                // 3) CTA buttons — spring in one by one
+                .fromTo('#hero-ctas',
+                    { y: 25, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.2)' },
+                    '-=0.4'
+                );
+        });
+
+        // === SCROLL PROGRESS BAR ===
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            document.getElementById('scroll-progress').style.width = (scrollTop / docHeight * 100) + '%';
+        });
+
+        // === PARALLAX HERO VIDEO ===
+        gsap.to('#hero video', {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+        });
+
+        // === FADE-IN ON SCROLL (exclude sector-cards to prevent double-anim) ===
+        document.querySelectorAll('.fade-in:not(.sector-card)').forEach(el => {
+            gsap.from(el, {
+                y: 30, opacity: 0, duration: 0.9, ease: 'power2.out',
+                scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+            });
+        });
+
+        // === STAGGERED SECTOR CARDS (only I Tre Pilastri section) ===
+        const pilastri = document.querySelector('#portfolio')?.previousElementSibling?.previousElementSibling?.previousElementSibling?.previousElementSibling?.previousElementSibling;
+        const sectorCards = document.querySelectorAll('.sector-card:not(#portfolio .sector-card)');
+        let pilCards = [];
+        sectorCards.forEach(card => {
+            // Cards inside the services grid (first 3 sector cards)
+            if (card.closest('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3')) {
+                pilCards.push(card);
+            }
+        });
+        pilCards.forEach((card, i) => {
+            gsap.from(card, {
+                y: 50, opacity: 0, duration: 0.9, delay: i * 0.2, ease: 'power2.out',
+                scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none none' }
+            });
+        });
+
+        // === PORTFOLIO CARDS (separate from sector cards) ===
+        document.querySelectorAll('#portfolio .sector-card').forEach((card, i) => {
+            gsap.from(card, {
+                y: 40, opacity: 0, duration: 0.8, delay: i * 0.1, ease: 'power2.out',
+                scrollTrigger: { trigger: card, start: 'top 88%', toggleActions: 'play none none none' }
+            });
+        });
+
+        // === GOLD LINE ANIMATION ===
+        document.querySelectorAll('.gold-line').forEach(line => {
+            ScrollTrigger.create({
+                trigger: line, start: 'top 85%',
+                onEnter: () => line.classList.add('active')
+            });
+        });
+
+        // === ANIMATED COUNTERS ===
+        document.querySelectorAll('.counter-num').forEach(counter => {
+            const target = parseInt(counter.dataset.target);
+            const suffix = counter.dataset.suffix || '';
+            gsap.to(counter, {
+                innerText: target, duration: 2.5, ease: 'power1.out', snap: { innerText: 1 },
+                scrollTrigger: { trigger: counter, start: 'top 88%', toggleActions: 'play none none none' },
+                onUpdate: function () {
+                    const val = Math.round(parseFloat(counter.textContent) || 0);
+                    counter.textContent = val + suffix;
+                }
+            });
+        });
+
+        // === PARALLAX IMAGES ===
+        gsap.utils.toArray('.parallax-img').forEach(img => {
+            gsap.to(img, {
+                yPercent: -10, ease: 'none',
+                scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: 0.5 }
+            });
+        });
+
+        // === NAVBAR SCROLL (optimized with requestAnimationFrame) ===
+        const navbar = document.getElementById('navbar');
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    if (window.scrollY > 80) {
+                        navbar.classList.remove('nav-glass');
+                        navbar.classList.add('nav-solid');
+                    } else {
+                        navbar.classList.remove('nav-solid');
+                        navbar.classList.add('nav-glass');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // === MOBILE MENU ===
+        document.getElementById('menu-toggle').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
+        document.getElementById('menu-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+        });
+
+        // === CURSOR POINTER ON CLICKABLE ===
+        document.querySelectorAll('a, button, .sector-card').forEach(el => el.style.cursor = 'pointer');
+    </script>
+
+</body>
+
+</html>

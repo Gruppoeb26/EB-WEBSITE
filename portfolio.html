@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Gruppo EB — Edilizia, Efficientamento Energetico, Infissi e Serramenti</title>
+    <meta name="description"
+        content="I lavori di Gruppo EB: ristrutturazioni, impianti fotovoltaici, infissi e opere edili a Vetralla e Roma. Scopri i nostri progetti più significativi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'teal-brand': '#2D3E40',
+                        'gold': '#C8A45A',
+                        'off-white': '#F5F3EF',
+                        'sage': '#A8B5A2',
+                        'charcoal': '#1A1A1A',
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        .nav-glass {
+            background: rgba(45, 62, 64, 0.15);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-solid {
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-solid .nav-link,
+        .nav-solid .nav-logo {
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid .nav-link:hover {
+            color: #C8A45A !important;
+        }
+
+        .nav-solid .nav-cta {
+            background: #C8A45A !important;
+            color: #2D3E40 !important;
+        }
+
+        .nav-solid .nav-logo img {
+            filter: none !important;
+        }
+
+        .nav-solid #menu-toggle svg {
+            stroke: #2D3E40;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: #C8A45A;
+        }
+
+        /* Portfolio card — 21st.dev 3D Tilt */
+        .portfolio-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 60px -15px rgba(45, 62, 64, 0.3), 0 0 0 1px rgba(200, 164, 90, 0.15);
+        }
+
+        .portfolio-card img {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-card .card-overlay {
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(2px);
+        }
+
+        .portfolio-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            padding: 1.5px;
+            background: linear-gradient(135deg, transparent 40%, rgba(200, 164, 90, 0.5) 50%, transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .portfolio-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Filter buttons */
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: #2D3E40;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-off-white font-sans text-charcoal overflow-x-hidden">
+
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gold z-[60]" style="width:0%"></div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar"
+        class="nav-solid fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex items-center justify-between">
+        <a href="index.html" class="nav-logo flex items-center text-teal-brand transition-colors duration-300">
+            <img src="Logo/logo-trasparente.png" alt="Gruppo EB" class="h-10">
+        </a>
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="index.html#pilastri"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Servizi</a>
+            <a href="portfolio.html"
+                class="nav-link text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[2px] after:bg-gold">Portfolio</a>
+            <a href="news.html"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">News</a>
+            <a href="index.html#contatti"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-gold after:transition-all after:duration-300 hover:after:w-full">Contatti</a>
+            <a href="tel:+3907611576845"
+                class="nav-link text-teal-brand hover:text-gold text-sm font-medium tracking-wide transition-colors flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                +39 076 115 76845
+            </a>
+            <a href="index.html#contatti"
+                class="nav-cta bg-gold text-teal-brand text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-amber-500">Preventivo
+                Gratuito</a>
+        </div>
+        <button id="menu-toggle" class="lg:hidden text-teal-brand z-60 relative" aria-label="Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+        class="mobile-menu fixed inset-0 z-50 bg-teal-brand flex flex-col justify-center items-start px-10 gap-6">
+        <button id="menu-close" class="absolute top-6 right-6 text-white" aria-label="Chiudi menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+        <a href="index.html#pilastri" class="mobile-link text-white text-3xl font-serif italic">Servizi</a>
+        <a href="portfolio.html" class="mobile-link text-gold text-3xl font-serif italic">Portfolio</a>
+        <a href="news.html" class="mobile-link text-white text-3xl font-serif italic">News</a>
+        <a href="index.html#contatti" class="mobile-link text-white text-3xl font-serif italic">Contatti</a>
+        <div class="mt-8 pt-8 border-t border-white/20 w-full text-center lg:text-left">
+            <p class="text-white/60 text-sm font-sans">+39 076 115 76845 · info@gruppoeb.it</p>
+        </div>
+    </div>
+
+    <!-- PAGE HERO -->
+    <section class="bg-teal-brand pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-16 lg:px-24 relative overflow-hidden">
+        <div class="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] rounded-full bg-gold/5"></div>
+        <div class="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-white/5"></div>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="gold-line"></div>
+                <p class="text-gold text-sm font-sans font-semibold tracking-[0.3em] uppercase">I Nostri Lavori</p>
+            </div>
+            <h1 id="page-title" class="font-serif text-white text-5xl md:text-7xl leading-[1.05] mb-6 opacity-0">
+                Portfolio</h1>
+            <p id="page-sub"
+                class="font-sans text-white/60 text-lg md:text-xl font-light max-w-2xl leading-relaxed opacity-0">
+                Una curatela dei nostri progetti più significativi, dove la forma incontra la funzione.
+            </p>
+        </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <section class="py-8 px-6 md:px-16 lg:px-24 bg-off-white border-b border-stone-200">
+        <div class="max-w-6xl mx-auto flex flex-wrap gap-3 justify-center">
+            <button class="filter-btn active text-sm font-medium px-5 py-2 rounded-full border border-teal-brand/20"
+                data-filter="all">Tutti</button>
+            <button
+                class="filter-btn text-sm font-medium px-5 py-2 rounded-full border border-teal-brand/20 text-teal-brand hover:bg-teal-brand hover:text-white"
+                data-filter="edilizia">Edilizia</button>
+            <button
+                class="filter-btn text-sm font-medium px-5 py-2 rounded-full border border-teal-brand/20 text-teal-brand hover:bg-teal-brand hover:text-white"
+                data-filter="infissi">Infissi e Serramenti</button>
+            <button
+                class="filter-btn text-sm font-medium px-5 py-2 rounded-full border border-teal-brand/20 text-teal-brand hover:bg-teal-brand hover:text-white"
+                data-filter="fotovoltaico">Fotovoltaico</button>
+            <button
+                class="filter-btn text-sm font-medium px-5 py-2 rounded-full border border-teal-brand/20 text-teal-brand hover:bg-teal-brand hover:text-white"
+                data-filter="ristrutturazione">Ristrutturazione</button>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO GRID -->
+    <section class="py-20 md:py-28 px-6 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto">
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Project 1 — same as index.html -->
+                <div class="portfolio-card relative rounded-2xl overflow-hidden cursor-pointer group h-[400px]"
+                    data-category="edilizia">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+                        alt="Villa Moderna" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/30 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-2">Edilizia</p>
+                        <h3 class="font-serif text-white text-2xl mb-2">Villa Moderna — Roma</h3>
+                        <p class="text-white/70 text-sm font-light">Progettazione e costruzione di una villa moderna con
+                            finiture di pregio nel quartiere EUR di Roma.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 — same as index.html -->
+                <div class="portfolio-card relative rounded-2xl overflow-hidden cursor-pointer group h-[400px]"
+                    data-category="infissi">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+                        alt="Parco Commerciale" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/30 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-2">Infissi e Serramenti
+                        </p>
+                        <h3 class="font-serif text-white text-2xl mb-2">Parco Commerciale Città Dei Papi</h3>
+                        <p class="text-white/70 text-sm font-light">Fornitura e installazione di infissi in alluminio a
+                            taglio termico per il parco commerciale di Viterbo.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 — same as index.html -->
+                <div class="portfolio-card relative rounded-2xl overflow-hidden cursor-pointer group h-[400px]"
+                    data-category="ristrutturazione">
+                    <img src="Infissi/hf_20260222_120231_8616115f-31bc-4626-93fa-c3a6a0868a09.png" alt="Progetto Findus"
+                        class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/30 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-2">Ristrutturazione</p>
+                        <h3 class="font-serif text-white text-2xl mb-2">Progetto Findus — Uffici</h3>
+                        <p class="text-white/70 text-sm font-light">Ristrutturazione completa degli uffici aziendali con
+                            ottimizzazione degli spazi e efficientamento energetico.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 — same as index.html -->
+                <div class="portfolio-card relative rounded-2xl overflow-hidden cursor-pointer group h-[400px]"
+                    data-category="fotovoltaico">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"
+                        alt="Impianto Fotovoltaico" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/30 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-2">Fotovoltaico</p>
+                        <h3 class="font-serif text-white text-2xl mb-2">Impianto Fotovoltaico Residenziale</h3>
+                        <p class="text-white/70 text-sm font-light">Installazione di un impianto fotovoltaico da 6kW con
+                            sistema di accumulo per massima autosufficienza energetica.</p>
+                    </div>
+                </div>
+
+                <!-- Project 5 (extra) -->
+                <div class="portfolio-card relative rounded-2xl overflow-hidden cursor-pointer group h-[400px]"
+                    data-category="edilizia">
+                    <img src="Edilizia/hf_20260222_123222_2258c49c-d5db-4d8d-b301-cde35520b171.png"
+                        alt="Complesso Residenziale" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/30 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-2">Edilizia</p>
+                        <h3 class="font-serif text-white text-2xl mb-2">Complesso Residenziale — Vetralla</h3>
+                        <p class="text-white/70 text-sm font-light">Costruzione di un complesso residenziale con
+                            standard di efficienza energetica A4 e finiture di pregio.</p>
+                    </div>
+                </div>
+
+                <!-- Project 6 (extra) -->
+                <div class="portfolio-card relative rounded-2xl overflow-hidden cursor-pointer group h-[400px]"
+                    data-category="fotovoltaico">
+                    <img src="Fotovoltaico/hf_20260222_122827_f9379921-505b-425d-92c2-0a0715edb551.png"
+                        alt="Efficientamento Condominio" class="w-full h-full object-cover">
+                    <div
+                        class="card-overlay absolute inset-0 bg-gradient-to-t from-teal-brand/90 via-teal-brand/30 to-transparent flex flex-col justify-end p-8">
+                        <p class="text-gold text-xs font-semibold tracking-widest uppercase mb-2">Fotovoltaico</p>
+                        <h3 class="font-serif text-white text-2xl mb-2">Efficientamento Energetico Condominio</h3>
+                        <p class="text-white/70 text-sm font-light">Intervento completo di efficientamento energetico
+                            con cappotto termico, fotovoltaico e sostituzione infissi.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-teal-brand py-20 px-6 md:px-16 lg:px-24">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="gold-line mx-auto mb-8"></div>
+            <h2 class="font-serif text-white text-3xl md:text-5xl leading-tight mb-6">Hai un progetto in mente?</h2>
+            <p class="text-white/60 text-lg font-light max-w-xl mx-auto mb-10">Contattaci per un preventivo gratuito.
+                Unico interlocutore, zero pensieri.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="index.html#contatti"
+                    class="bg-gold hover:bg-amber-500 text-teal-brand font-semibold px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:scale-105">Richiedi
+                    Preventivo</a>
+                <a href="tel:+3907611576845"
+                    class="border border-white/40 hover:border-white text-white font-medium px-8 py-3.5 rounded-full text-sm tracking-wide transition-all duration-300 hover:bg-white/10">Chiama
+                    Ora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-teal-brand py-24 px-6 md:px-16 lg:px-24 border-t border-white/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-1">
+                    <img src="Logo/logo-bianco.png" alt="Gruppo EB" class="h-12 mb-4">
+                    <p class="text-white/50 text-sm font-light leading-relaxed">Unico Interlocutore,<br>Zero Pensieri.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-lg tracking-wide mb-6">Settori</h4>
+                    <a href="index.html#pilastri"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Edilizia</a>
+                    <a href="index.html#pilastri"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Efficientamento
+                        Energetico</a>
+                    <a href="index.html#pilastri"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Infissi e
+                        Serramenti</a>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-lg tracking-wide mb-6">Link</h4>
+                    <a href="index.html"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Home</a>
+                    <a href="portfolio.html"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Portfolio</a>
+                    <a href="news.html"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">News</a>
+                    <a href="index.html#contatti"
+                        class="block text-white/70 hover:text-gold text-sm mb-2 transition-colors">Contatti</a>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-lg tracking-wide mb-6">Contatti</h4>
+                    <p class="text-white/70 text-sm mb-2">Vetralla (VT) · Roma</p>
+                    <p class="text-white/70 text-sm mb-2">+39 076 115 76845</p>
+                    <p class="text-white/70 text-sm mb-4">info@gruppoeb.it</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">instagram
+                            <span>→</span></a>
+                        <a href="#"
+                            class="inline-flex items-center justify-between text-white/60 hover:text-gold border border-white/20 hover:border-gold rounded-full px-4 py-2 text-xs font-sans transition-all w-fit min-w-[140px]">facebook
+                            <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-white/40 text-xs tracking-wide">© 2026 Gruppo EB srl | P.IVA 02362920569 | Tutti i
+                    diritti riservati.</p>
+                <div class="flex items-center gap-6">
+                    <p class="text-white/30 text-xs italic">Made in Italy</p>
+                    <p class="text-white/50 text-xs font-medium tracking-wider uppercase">Powered by <span
+                            class="text-gold">Karim.ai</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/393917274650" target="_blank" rel="noopener"
+        class="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20BD5A] w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+        aria-label="Contattaci su WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <!-- ANIMATIONS -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero entrance
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline({ delay: 0.3 });
+            tl.fromTo('#page-title', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out' })
+                .fromTo('#page-sub', { y: 30, opacity: 0, filter: 'blur(6px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' }, '-=0.6');
+        });
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            document.getElementById('scroll-progress').style.width = (scrollTop / docHeight * 100) + '%';
+        });
+
+        // Staggered card entrance
+        document.querySelectorAll('.portfolio-card').forEach((card, i) => {
+            gsap.from(card, {
+                y: 50, opacity: 0, duration: 0.8, delay: i * 0.12, ease: 'power2.out',
+                scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none none' }
+            });
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.portfolio-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        gsap.to(card, { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' });
+                        card.style.display = '';
+                    } else {
+                        gsap.to(card, {
+                            opacity: 0, scale: 0.95, duration: 0.3, ease: 'power2.in',
+                            onComplete: () => { card.style.display = 'none'; }
+                        });
+                    }
+                });
+            });
+        });
+
+        // Mobile menu
+        document.getElementById('menu-toggle').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
+        document.getElementById('menu-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+        document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open')); });
+    </script>
+</body>
+
+</html>
