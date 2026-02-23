@@ -418,14 +418,31 @@
             text-shadow: 0 0 40px rgba(200, 164, 90, 0.3);
         }
 
-        /* Nasconde il chatbot di Framework 360 a sinistra senza rompere il form */
+        /* Nasconde il chatbot e ogni widget di Framework 360 senza rompere il form */
         .ms-chat-container,
         .ms-chat-launcher,
         #ms-chat-container,
-        .ms-chatbot {
+        .ms-chatbot,
+        .ms-widget,
+        #ms-widget,
+        [class*="ms-chat"],
+        [id*="ms-chat"],
+        [class*="ms-widget"],
+        [id*="ms-widget"],
+        ms-chat,
+        ms-widget,
+        .ms-launcher,
+        #ms-launcher-container,
+        .ms-chat-launcher-active,
+        .ms-chat-button {
             display: none !important;
             visibility: hidden !important;
+            opacity: 0 !important;
             pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: fixed !important;
+            left: -9999px !important;
         }
     </style>
     <script src="https://www.gruppoeb.it/m/bridge/embed.js" crossorigin="anonymous"></script>
